@@ -1,0 +1,5 @@
+﻿namespace MW_SOLUCOES.View;
+
+public class ClienteView
+{
+}
