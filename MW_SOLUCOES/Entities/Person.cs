@@ -16,43 +16,64 @@ public class Person
     public Person(Guid id, ClientName name, int age, string cpf, string phone, Address address)
     {
         Id = id;
-        Name = name;
-        Age = age;
-        CPF = cpf;
-        Phone = phone;
-        Address = address;
+        UpdateName(name.FirstName,name.LastName);
+        UpdateAge(age);
+        UpdateCpf(cpf);
+        UpdatePhone(phone);
+        UpdateAddress(address);
     }
-    public void UpdateName(string firstName, string lastName)
+    public void UpdateName(string newFirstName, string newLastName)
     {
-        if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName))
+        if (string.IsNullOrEmpty(newFirstName) || string.IsNullOrEmpty(newLastName))
         {
             throw new NegocioException("Primeiro ou último nome estão em branco.");
         }
-        Name.FirstName = firstName;
-        Name.LastName = lastName;
+        Name = new ClientName(newFirstName, newLastName);
     }
-    public void UpdateAge(int age)
+    public void UpdateAge(int newAge)
     {
-        if (age < 0 || age > 130)
+        if (newAge < 0 || newAge > 130)
         {
             throw new NegocioException("Idade fora dos padrões aceitáveis.");
         }
-        Age = age;
+        Age = newAge;
     }
-    public void UpdateContactInfo(string email,string phone)
+    public void UpdateEmail(string newEmail)
     {
-        if (!EmailValidationHelper.IsValidEmail(email))
+        if (!EmailValidationHelper.IsValidEmail(newEmail))
         {
             throw new NegocioException("Email inválido.");
         }
-        Email = email;
-        if (Phone.Length == 13)
+        Email = newEmail;
+    }
+
+    public void UpdatePhone(string newPhone)
+    {
+        if (newPhone.Length == 13)
         {
-            Phone = phone;
+            Phone = newPhone;
         }
         else
         {
             throw new NegocioException("O número de telefone inserido é inválido");
         }
+
+    }
+
+    public void UpdateCpf(string rawCpf)
+    {
+        string formatedCpf = CPFValidationHelper.RemoveFormat(rawCpf);
+        if (CPFValidationHelper.IsValid(formatedCpf))
+        {
+            CPF = formatedCpf;
+        }
+        else
+        {
+            throw new NegocioException("O CPF é inválido.");
+        }
+    }
+    public void UpdateAddress(Address newAddress)
+    {
+        Address = newAddress;   
     }
 }

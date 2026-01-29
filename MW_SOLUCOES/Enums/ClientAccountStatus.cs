@@ -3,6 +3,5 @@
 public enum ClientAccountStatus
 {
     Active,
-    Blocked,
-    Deleted
+    Blocked
 }
