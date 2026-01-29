@@ -1,6 +1,6 @@
 ﻿namespace MW_SOLUCOES.Helpers;
 
-public static class CPFValidationHelper
+public class CPFValidationHelper
 {
     public static string RemoveFormat(string cpf)
     {

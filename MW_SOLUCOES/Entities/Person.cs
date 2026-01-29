@@ -55,9 +55,4 @@ public class Person
             throw new NegocioException("O número de telefone inserido é inválido");
         }
     }
-    public void UpdateCpf(string rawCpf)
-    {
-        string cleanCpf = CPFValidationHelper.RemoveFormat(rawCpf);
-        bool validCpf = CPFValidationHelper.IsValid(rawCpf);
-    }
 }
