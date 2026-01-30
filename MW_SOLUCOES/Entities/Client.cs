@@ -7,7 +7,8 @@ public class Client : Person
 {
     public int NumberOfOrders { get; private set; }
     public ClientAccountStatus AccountStatus { get; private set; }
-    public Client(Guid id, ClientName name, int age, string cpf, string phone, Address address, ClientAccountStatus accountStatus, int numberOfOrders = 0) : base(id, name, age, cpf, phone, address)
+    
+    public Client(Guid id, PersonName name, int age, string cpf, string phone, Address address, string email,int numberOfOrders,ClientAccountStatus accountStatus) : base(id, name, age, cpf, phone, address, email)
     {
         NumberOfOrders = numberOfOrders;
         AccountStatus = accountStatus;
@@ -16,7 +17,6 @@ public class Client : Person
     {
         NumberOfOrders++;
     }
-
     public void UpdateAccountStatus(ClientAccountStatus accountStatus)
     {
         AccountStatus = accountStatus;

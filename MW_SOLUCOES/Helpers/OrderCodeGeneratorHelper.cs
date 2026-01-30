@@ -1,6 +1,6 @@
 ﻿namespace MW_SOLUCOES.Helpers;
 
-public static class ServiceCodeGeneratorHelper
+public static class OrderCodeGeneratorHelper
 {
     private static int _globalCounter = 1;
     private static DateTime _lastGeneratedDate = DateTime.Now;

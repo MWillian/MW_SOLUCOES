@@ -1,11 +1,11 @@
 ﻿namespace MW_SOLUCOES.Entities;
 
-public class ClientName
+public class PersonName
 {
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
 
-    public ClientName(string firstName, string lastName)
+    public PersonName(string firstName, string lastName)
     {
         FirstName = firstName;
         LastName = lastName;

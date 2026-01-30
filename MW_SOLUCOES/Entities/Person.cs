@@ -6,21 +6,22 @@ using MW_SOLUCOES.Helpers;
 public class Person
 {
     public Guid Id { get; private set; }
-    public ClientName Name { get; private set; }
+    public PersonName Name { get; private set; }
     public int Age { get; private set; }
     public string CPF { get; private set; } = string.Empty;
     public string Phone { get; private set; } = string.Empty;
     public string Email { get; private set; } = string.Empty;
     public Address Address { get; private set; }
 
-    public Person(Guid id, ClientName name, int age, string cpf, string phone, Address address)
+    public Person(Guid id, PersonName name, int age, string cpf, string phone, Address address, string email)
     {
         Id = id;
-        UpdateName(name.FirstName,name.LastName);
+        UpdateName(name.FirstName, name.LastName);
         UpdateAge(age);
         UpdateCpf(cpf);
         UpdatePhone(phone);
         UpdateAddress(address);
+        UpdateEmail(email);
     }
     public void UpdateName(string newFirstName, string newLastName)
     {
@@ -28,7 +29,7 @@ public class Person
         {
             throw new NegocioException("Primeiro ou último nome estão em branco.");
         }
-        Name = new ClientName(newFirstName, newLastName);
+        Name = new PersonName(newFirstName, newLastName);
     }
     public void UpdateAge(int newAge)
     {
