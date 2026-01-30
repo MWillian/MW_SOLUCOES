@@ -8,18 +8,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\**" />
     <Compile Remove="DTOs\**" />
     <Compile Remove="Repositories\**" />
     <Compile Remove="Services\**" />
-    <EmbeddedResource Remove="Data\**" />
     <EmbeddedResource Remove="DTOs\**" />
     <EmbeddedResource Remove="Repositories\**" />
     <EmbeddedResource Remove="Services\**" />
-    <None Remove="Data\**" />
     <None Remove="DTOs\**" />
     <None Remove="Repositories\**" />
     <None Remove="Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Repository\" />
   </ItemGroup>
 
 </Project>
