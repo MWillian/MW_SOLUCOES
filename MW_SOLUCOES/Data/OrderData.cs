@@ -1,6 +1,10 @@
-﻿namespace MW_SOLUCOES.Data;
-using Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using MW_SOLUCOES.Entities;
 using MW_SOLUCOES.Enums;
+
+namespace MW_SOLUCOES.Data;
 
 public static class OrderData
 {
@@ -13,11 +17,13 @@ public static class OrderData
 
     private static void Seed()
     {
-        try{
+        try
+        {
             if (!ClientData.Clients.Any() || !MaintenanceData.Services.Any())
             {
                 return;
             }
+
             var cliente1 = ClientData.Clients.First(c => c.Name.FirstName == "Marcos");
             var servicoFormatar = MaintenanceData.Services.First(s => s.Name.Contains("Formatação"));
 
@@ -30,8 +36,9 @@ public static class OrderData
                 Guid.NewGuid(),
                 cliente1,
                 PaymentMethod.CreditCard,
-                null,
-                itens1
+                null, 
+                itens1,
+                "Solicitada formatação completa com backup de arquivos pessoais."
             );
 
             var cliente2 = ClientData.Clients.First(c => c.Name.FirstName == "Juliana");
@@ -49,7 +56,8 @@ public static class OrderData
                 cliente2,
                 PaymentMethod.Pix,
                 null,
-                itens2
+                itens2,
+                "Montagem de PC Gamer novo e limpeza preventiva de máquina antiga."
             );
 
             var cliente3 = ClientData.Clients.First(c => c.Name.FirstName == "Ricardo");
@@ -63,14 +71,16 @@ public static class OrderData
                 Guid.NewGuid(),
                 cliente3,
                 PaymentMethod.Cash,
-                "OS-20230901-001", 
+                "OS-20230901-001",
                 itens3,
+                "Diagnóstico técnico inicial para identificar lentidão no processamento.",
                 dataAntiga,
                 dataAntiga
             );
 
             Orders.AddRange(new List<Order> { order1, order2, order3 });
-        }catch(Exception ex)
+        }
+        catch (Exception ex)
         {
             Console.WriteLine($"Erro ao gerar banco de Pedidos: {ex.Message}");
         }
