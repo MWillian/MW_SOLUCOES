@@ -13,21 +13,21 @@ public class Order
     public List<MaintenanceItem> ServiceList { get; private set; }
     public OrderStatus Status { get; private set; }
     public DateTime? CreatedAt { get; private set; }
-    public DateTime? LastUpdatedAt { get; private set; }
     public DateTime? FinishedAt { get; private set; }
-    public List<string> Descriptions { get; private set; } = new List<string>();
-    public Order(Guid id, Client client, PaymentMethod paymentMethod, string orderCode, List<MaintenanceItem> serviceList ,string description, DateTime? createdAt = null, DateTime? lastUpdatedAt = null, DateTime? finishedAt = null, OrderStatus orderStatus = OrderStatus.Open)
+    public string Description { get; private set; }
+    public OrderHistorylog Historylog { get; private set; }
+    public Order(Guid id, Client client, PaymentMethod paymentMethod, string orderCode, List<MaintenanceItem> serviceList ,string description, DateTime? createdAt = null, DateTime? finishedAt = null, OrderStatus orderStatus = OrderStatus.Open)
     {
         Id = id;
         Client = client;
         PaymentMethod = paymentMethod;
         OrderCode = string.IsNullOrWhiteSpace(orderCode) ? OrderCodeGeneratorHelper.GenerateCode() : orderCode;
         ServiceList = serviceList;
-        UpdateOrderDescription(description);
+        Description = description;
         CreatedAt = createdAt ?? DateTime.Now;
-        LastUpdatedAt = lastUpdatedAt ?? CreatedAt;
-        FinishedAt = finishedAt ?? finishedAt;
+        FinishedAt = finishedAt;
         Status = orderStatus;
+        Historylog = new OrderHistorylog();
     }
     public void UpdateOrderDescription(string newDescription)
     {
@@ -35,19 +35,20 @@ public class Order
         {
             throw new NegocioException("A descrição não por ser vazia");
         }
-        LastUpdatedAt = DateTime.Now;
-        Descriptions.Add(newDescription);
+        Historylog.RegisterLog("Description");
     }
 
     public void CloseOrder()
     {
         Status = OrderStatus.Closed;
         FinishedAt = DateTime.Now;
+        Historylog.RegisterLog("Status");
     }
     
     public void UpdatePaymentMethod(PaymentMethod newPaymentMethod)
     {
         PaymentMethod = newPaymentMethod;
+        Historylog.RegisterLog("Método de pagamento");
     }
 
     public void AddServiceToOrder(MaintenanceItem service)
@@ -55,10 +56,12 @@ public class Order
         if (ServiceList.Contains(service))
         {
             ServiceList.First(x => x == service).RaiseItemQuantity();
+            Historylog.RegisterLog("Quantidade de serviços");
         }
         else
         {
             ServiceList.Add(service);
+            Historylog.RegisterLog("Lista de serviços");
         }
     }
 
@@ -67,6 +70,7 @@ public class Order
         if (ServiceList.Contains(maintenanceItem))
         {
             ServiceList.First(x => x == maintenanceItem).DecreaseItemQuantity();
+            Historylog.RegisterLog("Quantidade de serviços");
         }
         else
         {
@@ -79,6 +83,7 @@ public class Order
         if (ServiceList.Contains(service))
         {
             ServiceList.Remove(service);
+            Historylog.RegisterLog("Lista de serviços");
         }
         else
         {
