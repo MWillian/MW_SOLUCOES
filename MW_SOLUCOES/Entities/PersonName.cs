@@ -1,0 +1,19 @@
+﻿namespace MW_SOLUCOES.Entities;
+
+public class PersonName
+{
+    public string FirstName { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
+
+    public PersonName(string firstName, string lastName)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+    }
+
+    public string GetFullName()
+    {
+        string fullName = $"{FirstName} {FirstName}";
+        return fullName;
+    }
+}

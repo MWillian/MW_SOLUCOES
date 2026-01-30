@@ -2,22 +2,17 @@
 
 using MW_SOLUCOES.Enums;
 using MW_SOLUCOES.Exceptions;
-using MW_SOLUCOES.Helpers;
 
 public class MaintenanceService
 {
     public Guid Id { get; private set; }
-    public Client Client { get; private set; }
-    public string ServiceCode {  get; private set; } = string.Empty;
     public string Name { get; private set; } = string.Empty;
     public string Description { get; private set; } = string.Empty;
     public decimal Price { get; private set; }
     public ServiceStatus ServiceActualStatus { get; private set; } 
     public ServiceCategories ServiceCategory { get; private set; }
-    public DateTime? CreatedAt { get; private set; }
-    public DateTime? LastUpdatedAt { get; private set; }
-    public DateTime? FinishedAt { get; private set; }
-    public MaintenanceService(Guid id, string name, string description, decimal price, ServiceCategories serviceCategories, Client client, ServiceStatus serviceStatus = ServiceStatus.Unavailable, string? serviceCode = null, DateTime? createdAt = null, DateTime? lastUpdatedAt = null, DateTime? finishedAt = null)
+
+    public MaintenanceService(Guid id, string name, string description, decimal price, ServiceCategories serviceCategories, ServiceStatus serviceStatus = ServiceStatus.Unavailable)
     {
         Id = id;
         UpdateServiceName(name);
@@ -25,11 +20,6 @@ public class MaintenanceService
         UpdateServicePrice(price);
         ServiceActualStatus = serviceStatus;
         ServiceCategory = serviceCategories;
-        Client = client;
-        ServiceCode = string.IsNullOrWhiteSpace(serviceCode) ? ServiceCodeGeneratorHelper.GenerateCode() : serviceCode;
-        CreatedAt = createdAt ?? DateTime.Now;
-        LastUpdatedAt = lastUpdatedAt ?? CreatedAt;
-        FinishedAt = finishedAt ?? finishedAt;
     }
 
     public void UpdateServiceCategory(ServiceCategories newServiceCaterory)
@@ -66,7 +56,6 @@ public class MaintenanceService
         }
         Description = newServiceDescription;
     }
-
     public void UpdateServiceName(string name)
     {
         if (string.IsNullOrWhiteSpace(name))
