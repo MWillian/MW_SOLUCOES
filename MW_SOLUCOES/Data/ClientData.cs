@@ -14,9 +14,16 @@ public static class ClientData
     {
         Seed();
     }
-    private static void IncrementId()
+    private static int IncrementId()
     {
-        _nextInt++;
+        int nextId = ++_nextInt;
+        _nextInt = nextId;
+        return _nextInt;
+    }
+
+    public static int GetNextId()
+    {
+        return IncrementId();
     }
     private static void Seed()
     {

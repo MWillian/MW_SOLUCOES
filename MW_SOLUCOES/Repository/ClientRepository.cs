@@ -22,51 +22,50 @@ public class ClientRepository : IClientRepository
             return false;
         }
     }
+        
+    public List<Client> GetActiveClients() => ClientData.Clients.Where(x => x.AccountStatus == ClientAccountStatus.Active).ToList();
+        
+    public List<Client> GetAllClients() => ClientData.Clients;
 
-    public List<Client> GetActiveClients()
-    {
-        return ClientData.Clients.Where(x => x.AccountStatus == ClientAccountStatus.Active).ToList();
-    }
+    public List<Client> GetBlockedClients() => ClientData.Clients.Where(x => x.AccountStatus == ClientAccountStatus.Blocked).ToList();
 
-    public List<Client> GetAllClients()
-    {
-        return ClientData.Clients;
-    }
+    public Client? GetClientByCPF(string cpf) => ClientData.Clients.SingleOrDefault(x => x.CPF == cpf);
+    
+    public Client? GetClientById(int id) => ClientData.Clients.SingleOrDefault(x => x.Id == id);
 
-    public List<Client> GetBlockedClients()
-    {
-        return ClientData.Clients.Where(x => x.AccountStatus == ClientAccountStatus.Blocked).ToList();
-    }
-
-    public Client? GetClientByCPF(string cpf)
-    {
-        return ClientData.Clients.SingleOrDefault(x => x.CPF == cpf);
-    }
-
-    public Client? GetClientById(int id)
-    {
-        return ClientData.Clients.SingleOrDefault(x => x.Id == id);
-    }
-
-    public Client? GetClientByName(string name)
-    {
-        return ClientData.Clients.SingleOrDefault(x => $"{x.Name.FirstName} {x.Name.LastName}" == name);
-    }
+    public Client? GetClientByName(string name) => ClientData.Clients.SingleOrDefault(x => $"{x.Name.FirstName} {x.Name.LastName}" == name);
 
     public bool SaveClient(Client client)
     {
-        if (ClientData.Clients.Any(x => x.CPF == client.CPF))        {
-            return false;
+        if (GetClientByCPF(client.CPF) == null)
+        {
+            client.AssignId(ClientData.GetNextId());
+            ClientData.Clients.Add(client);
+            return true;
         }
         else
         {
-            //implementar
-            return true;
+            return false;
         }
     }
 
     public bool UpdateClient(Client client)
     {
-        throw new NotImplementedException();
+        Client actualClient = GetClientById(client.Id);
+        if ( actualClient == null)
+        {
+            return false;
+        }
+        else
+        {
+            actualClient.UpdateCpf(client.CPF);
+            actualClient.UpdateEmail(client.Email);
+            actualClient.UpdatePhone(client.Phone);
+            actualClient.UpdateAccountStatus(client.AccountStatus);
+            actualClient.UpdateName(client.Name.FirstName,client.Name.LastName);
+            actualClient.UpdateAddress(client.Address);
+            actualClient.UpdateAge(client.Age);
+            return true;
+        }
     }
 }
