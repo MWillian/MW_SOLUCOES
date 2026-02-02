@@ -8,12 +8,16 @@ namespace MW_SOLUCOES.Data;
 public static class ClientData
 {
     public static List<Client> Clients { get; private set; } = new List<Client>();
+    private static int _nextInt = 6;
 
     static ClientData()
     {
         Seed();
     }
-
+    private static void IncrementId()
+    {
+        _nextInt++;
+    }
     private static void Seed()
     {
         try
@@ -26,7 +30,7 @@ public static class ClientData
             var addr6 = new Address("Av. Boa Viagem", "2500", "Boa Viagem", "Recife", "PE", "51020-000");
 
             Clients.Add(new Client(
-                Guid.NewGuid(),
+                1,
                 new PersonName("Marcos", "Oliveira"),
                 35,
                 "12345678909",
@@ -38,7 +42,7 @@ public static class ClientData
             ));
 
             Clients.Add(new Client(
-                Guid.NewGuid(),
+                2,
                 new PersonName("Ana", "Beatriz"),
                 28,
                 "11144477735",
@@ -50,7 +54,7 @@ public static class ClientData
             ));
 
             Clients.Add(new Client(
-                Guid.NewGuid(),
+                3,
                 new PersonName("Ricardo", "Santos"),
                 42,
                 "98765432100",
@@ -62,7 +66,7 @@ public static class ClientData
             ));
 
             Clients.Add(new Client(
-                Guid.NewGuid(),
+                4,
                 new PersonName("Juliana", "Lima"),
                 31,
                 "55544433380",
@@ -74,7 +78,7 @@ public static class ClientData
             ));
 
             Clients.Add(new Client(
-                Guid.NewGuid(),
+                5,
                 new PersonName("Carlos", "Ferreira"),
                 55,
                 "33322211169",
@@ -86,7 +90,7 @@ public static class ClientData
             ));
 
             Clients.Add(new Client(
-                Guid.NewGuid(),
+                6,
                 new PersonName("Beatriz", "Souza"),
                 24,
                 "44477788827",
@@ -102,4 +106,5 @@ public static class ClientData
             Console.WriteLine($"Erro crítico ao inicializar banco de Clientes: {ex.Message}");
         }
     }
+
 }
