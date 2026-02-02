@@ -16,7 +16,8 @@ public class Order
     public DateTime? FinishedAt { get; private set; }
     public string Description { get; private set; }
     public OrderHistorylog Historylog { get; private set; }
-    public Order(Guid id, Client client, PaymentMethod paymentMethod, string orderCode, List<MaintenanceItem> serviceList ,string description, DateTime? createdAt = null, DateTime? finishedAt = null, OrderStatus orderStatus = OrderStatus.Open)
+    public decimal? OrderPrice { get; private set; }
+    public Order(Guid id, Client client, PaymentMethod paymentMethod, string orderCode, List<MaintenanceItem> serviceList, string description, DateTime? createdAt = null, DateTime? finishedAt = null, OrderStatus orderStatus = OrderStatus.Open, decimal? orderPrice = null)
     {
         Id = id;
         Client = client;
@@ -28,6 +29,7 @@ public class Order
         FinishedAt = finishedAt;
         Status = orderStatus;
         Historylog = new OrderHistorylog();
+        OrderPrice = CalculateTotal();
     }
     public void UpdateOrderDescription(string newDescription)
     {
