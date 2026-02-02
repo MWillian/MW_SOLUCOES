@@ -9,6 +9,7 @@ namespace MW_SOLUCOES.Data;
 public static class OrderData
 {
     public static List<Order> Orders { get; private set; } = new List<Order>();
+    private static int _nextInt = 6;
 
     static OrderData()
     {
@@ -84,5 +85,9 @@ public static class OrderData
         {
             Console.WriteLine($"Erro ao gerar banco de Pedidos: {ex.Message}");
         }
+    }
+    public static void IncrementId()
+    {
+        _nextInt++;
     }
 }

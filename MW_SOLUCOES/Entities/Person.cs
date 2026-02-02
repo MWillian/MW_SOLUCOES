@@ -5,7 +5,7 @@ using MW_SOLUCOES.Helpers;
 
 public class Person
 {
-    public Guid Id { get; private set; }
+    public int Id { get; private set; }
     public PersonName Name { get; private set; }
     public int Age { get; private set; }
     public string CPF { get; private set; } = string.Empty;
@@ -13,7 +13,7 @@ public class Person
     public string Email { get; private set; } = string.Empty;
     public Address Address { get; private set; }
 
-    public Person(Guid id, PersonName name, int age, string cpf, string phone, Address address, string email)
+    public Person(int id, PersonName name, int age, string cpf, string phone, Address address, string email)
     {
         Id = id;
         UpdateName(name.FirstName, name.LastName);

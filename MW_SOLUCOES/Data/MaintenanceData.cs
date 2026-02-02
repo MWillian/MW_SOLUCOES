@@ -6,6 +6,7 @@ namespace MW_SOLUCOES.Data;
 public static class MaintenanceData
 {
     public static List<MaintenanceService> Services { get; private set; } = new List<MaintenanceService>();
+    private static int _nextInt = 6;
 
     static MaintenanceData()
     {
@@ -17,7 +18,7 @@ public static class MaintenanceData
         try
         {
             Services.Add(new MaintenanceService(
-                Guid.NewGuid(),
+                1,
                 "Formatação Completa",
                 "Reinstalação do sistema operacional, backup de dados e instalação de drivers.",
                 150.00m,
@@ -26,7 +27,7 @@ public static class MaintenanceData
             ));
 
             Services.Add(new MaintenanceService(
-                Guid.NewGuid(),
+                2,
                 "Montagem de Computador Standard",
                 "Montagem de PC para escritório ou estudo com organização básica de cabos.",
                 200.00m,
@@ -35,7 +36,7 @@ public static class MaintenanceData
             ));
 
             Services.Add(new MaintenanceService(
-                Guid.NewGuid(),
+                3,
                 "Montagem de Computador Gamer/High-End",
                 "Montagem especializada com cable management avançado e instalação de sistemas de refrigeração complexos.",
                 450.00m,
@@ -44,7 +45,7 @@ public static class MaintenanceData
             ));
 
             Services.Add(new MaintenanceService(
-                Guid.NewGuid(),
+                4,
                 "Limpeza Preventiva Interna",
                 "Remoção de poeira, lubrificação de coolers e aplicação de nova pasta térmica de alta performance.",
                 120.00m,
@@ -53,7 +54,7 @@ public static class MaintenanceData
             ));
 
             Services.Add(new MaintenanceService(
-                Guid.NewGuid(),
+                5,
                 "Substituição de Periféricos Internos",
                 "Troca de memórias RAM, SSDs, HDs ou placas de rede.",
                 80.00m,
@@ -62,7 +63,7 @@ public static class MaintenanceData
             ));
 
             Services.Add(new MaintenanceService(
-                Guid.NewGuid(),
+                6,
                 "Substituição de Hardware Principal",
                 "Troca de Placa-mãe, Processador ou Fonte de Alimentação.",
                 250.00m,
@@ -71,7 +72,7 @@ public static class MaintenanceData
             ));
 
             Services.Add(new MaintenanceService(
-                Guid.NewGuid(),
+                7,
                 "Diagnóstico Técnico Avançado",
                 "Análise completa de hardware e software para identificação de defeitos intermitentes.",
                 90.00m,
@@ -80,7 +81,7 @@ public static class MaintenanceData
             ));
 
             Services.Add(new MaintenanceService(
-                Guid.NewGuid(),
+                8,
                 "Recuperação de Dados em Disco Rígido",
                 "Serviço especializado de recuperação de arquivos em discos com falha física.",
                 600.00m,
@@ -92,5 +93,9 @@ public static class MaintenanceData
         {
             Console.WriteLine($"Erro ao inicializar catálogo de serviços: {ex.Message}");
         }
+    }
+    public static void IncrementId()
+    {
+        _nextInt++;
     }
 }

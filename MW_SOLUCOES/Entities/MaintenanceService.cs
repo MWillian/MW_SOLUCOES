@@ -5,14 +5,14 @@ using MW_SOLUCOES.Exceptions;
 
 public class MaintenanceService
 {
-    public Guid Id { get; private set; }
+    public int Id { get; private set; }
     public string Name { get; private set; } = string.Empty;
     public string Description { get; private set; } = string.Empty;
     public decimal Price { get; private set; }
     public ServiceStatus ServiceActualStatus { get; private set; } 
     public ServiceCategories ServiceCategory { get; private set; }
 
-    public MaintenanceService(Guid id, string name, string description, decimal price, ServiceCategories serviceCategories, ServiceStatus serviceStatus = ServiceStatus.Unavailable)
+    public MaintenanceService(int id, string name, string description, decimal price, ServiceCategories serviceCategories, ServiceStatus serviceStatus = ServiceStatus.Unavailable)
     {
         Id = id;
         UpdateServiceName(name);
