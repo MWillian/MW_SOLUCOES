@@ -4,9 +4,9 @@ namespace MW_SOLUCOES.Entities;
 
 public class MaintenanceItem
 {
-    public MaintenanceService ServiceChoosed { get; private set; }
+    public ServiceCatalog ServiceChoosed { get; private set; }
     public int Quantity { get; private set; }
-    public MaintenanceItem(MaintenanceService serviceChoosed, int quantity)
+    public MaintenanceItem(ServiceCatalog serviceChoosed, int quantity)
     {
         ServiceChoosed = serviceChoosed;
         Quantity = quantity;

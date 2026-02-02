@@ -3,7 +3,7 @@
 using MW_SOLUCOES.Enums;
 using MW_SOLUCOES.Exceptions;
 
-public class MaintenanceService
+public class ServiceCatalog
 {
     public int Id { get; private set; }
     public string Name { get; private set; } = string.Empty;
@@ -12,7 +12,7 @@ public class MaintenanceService
     public ServiceStatus ServiceActualStatus { get; private set; } 
     public ServiceCategories ServiceCategory { get; private set; }
 
-    public MaintenanceService(int id, string name, string description, decimal price, ServiceCategories serviceCategories, ServiceStatus serviceStatus = ServiceStatus.Unavailable)
+    public ServiceCatalog(int id, string name, string description, decimal price, ServiceCategories serviceCategories, ServiceStatus serviceStatus = ServiceStatus.Unavailable)
     {
         Id = id;
         UpdateServiceName(name);

@@ -77,4 +77,16 @@ public class Person
     {
         Address = newAddress;   
     }
+    public void AssignId(int id)
+    {
+        if (id != 0)
+        {
+            throw new NegocioException("Não é possível atribuir um ID para um cliente já existente.");
+        }
+        if (id <= 0)
+        {
+            throw new NegocioException("Não é possível atribuir um ID negativo.");
+        }
+        Id = id;
+    }
 }
