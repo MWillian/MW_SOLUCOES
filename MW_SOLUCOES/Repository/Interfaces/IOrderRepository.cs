@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MW_SOLUCOES.Repository.Interfaces;
-internal interface IOrderRepository
+public interface IOrderRepository
 {
     public bool SaveOrder(Order order);
     public bool DeleteOrderByOrderCode(string orderCode);

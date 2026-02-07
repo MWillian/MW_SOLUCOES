@@ -22,7 +22,6 @@ public class ClientRepository : IClientRepository
             return false;
         }
     }
-        
     public List<Client> GetActiveClients() => ClientData.Clients.Where(x => x.AccountStatus == ClientAccountStatus.Active).ToList();
         
     public List<Client> GetAllClients() => ClientData.Clients;
@@ -35,17 +34,17 @@ public class ClientRepository : IClientRepository
 
     public Client? GetClientByName(string name) => ClientData.Clients.SingleOrDefault(x => $"{x.Name.FirstName} {x.Name.LastName}" == name);
 
-    public bool SaveClient(Client client)
+    public Client? SaveClient(Client client)
     {
         if (GetClientByCPF(client.CPF) == null)
         {
             client.AssignId(ClientData.GetNextId());
             ClientData.Clients.Add(client);
-            return true;
+            return client;
         }
         else
         {
-            return false;
+            return null;
         }
     }
 
