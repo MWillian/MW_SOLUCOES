@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MW_SOLUCOES.Repository.Interfaces;
-internal interface IClientRepository
+public interface IClientRepository
 {
-    public bool SaveClient(Client client);
+    public Client? SaveClient(Client client);
     public bool DeleteClientById(int id);
     public Client? GetClientById(int id);
     public Client? GetClientByCPF(string cpf);
